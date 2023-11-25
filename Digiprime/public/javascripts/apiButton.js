@@ -1,12 +1,14 @@
 const apiButton = document.querySelector('.apiButton');
 const apiCodeInput = document.getElementById('api_code');
+const apiEventInput = document.getElementById('api_event');
+const apiIDInput = document.getElementById('api_id');
 
-const apiUrl = "http://localhost:105"
+const apiUrl = "http://localhost:105";
 
 apiButton.addEventListener('click', function() {
-    //let yourForm = document.getElementById("myform");
     const apiCodeValue = apiCodeInput.value;
-    //const jwtToken = getCookie('jwt');
+    const apiEvent = apiEventInput.value;
+    const apiID = apiIDInput.value;
 
     // Fetch API call
     if (apiCodeValue == "hello"){
@@ -24,8 +26,21 @@ apiButton.addEventListener('click', function() {
       .catch(error => {
         console.log("Fetch error! (test)");
       });
+    } else if(apiCodeValue == "add"){ // Fixa så att man kan skicka från form input
+      fetch(`${apiUrl}/${apiCodeValue}`, {
+        method: 'POST',
+        body: JSON.stringify({
+          event: "digiprime",
+          id: "test"
+        })
+      })
+      .catch(error => {
+        console.log("Fetch error! (test)");
+      });
     }
 });
+
+//`{"event": ${apiEvent}, "id": ${apiID}}` add API body
 
 function getCookie(name) {
     const cookieString = document.cookie;

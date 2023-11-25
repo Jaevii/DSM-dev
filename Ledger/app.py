@@ -44,16 +44,16 @@ def query():
 
 @app.route("/test", methods=['POST'])
 def testAPI():
-    col.insert_one({'test': 'successful'})
+    col.insert_one({'test_digiprime': 'successful'})
     return "/test success"
 
-@app.route("/add", methods=['POST'])
+@app.route("/add", methods=['POST']) # Fixa så att man kan skicka från form input
 def startpy():
-    name = request.json['name']
-    event_id = request.json['event_id']
+    event = request.json['event']
+    id = request.json['id']
     ledger_dict = {
-        "name": name,
-        "event_id": event_id
+        "event": event,
+        "id": id
     }
     col.insert_one(ledger_dict)
     return "/add success"
